@@ -2,19 +2,50 @@ import crafatar.error
 import crafatar.objects
 import crafatar.parameters
 
-#TODO Implement these functions
-def getAvatar(uuid: str, size=crafatar.parameters.size(1), overlay=crafatar.parameters.Overlay.false, default=crafatar.parameters.Default.default):
-    pass
+import requests
 
-def getHeadRender(uuid: str, scale=crafatar.parameters.scale(1), overlay=crafatar.parameters.Overlay.false, default=crafatar.parameters.Default.default):
-    pass
+class CrafatarAPIWrapper(object):
+    def __init__(self,base_api_url="https://crafatar.com"):
+        self.__base_api_url = base_api_url
 
-def getBodyRender(uuid: str, scale=crafatar.parameters.scale(1), overlay=crafatar.parameters.Overlay.false, default=crafatar.parameters.Default.default):
-    pass
+    def getAvatar(self,uuid: str, size=crafatar.parameters.size(160), overlay=crafatar.parameters.Overlay.false, default=crafatar.parameters.Default.default):
+        base_url = self.__base_api_url+f"/avatars/{uuid}"
+        if size != crafatar.parameters.size(160):
+            base_url = f"{base_url}?&size={size}"
+        if overlay != crafatar.parameters.Overlay.false:
+            base_url = f"{base_url}?&overlay={overlay}"
+        if default != crafatar.parameters.Default.default:
+            base_url = f"{base_url}?&default={default}"
+        return crafatar.objects.AvatarResponse(requests.get(base_url))
 
-def getSkin(uuid: str, default=crafatar.parameters.Default.default):
-    pass
+    def getHeadRender(self,uuid: str, scale=crafatar.parameters.scale(6), overlay=crafatar.parameters.Overlay.false, default=crafatar.parameters.Default.default):
+        base_url = self.__base_api_url + f"/renders/head/{uuid}"
+        if scale != crafatar.parameters.scale(6):
+            base_url = f"{base_url}?&size={scale}"
+        if overlay != crafatar.parameters.Overlay.false:
+            base_url = f"{base_url}?&overlay={overlay}"
+        if default != crafatar.parameters.Default.default:
+            base_url = f"{base_url}?&default={default}"
+        return crafatar.objects.HeadRenderResponse(requests.get(base_url))
 
-def getCape(uuid: str, default=crafatar.parameters.Default.default):
-    pass
-#TODO
+    def getBodyRender(self, uuid: str, scale=crafatar.parameters.scale(6), overlay=crafatar.parameters.Overlay.false, default=crafatar.parameters.Default.default):
+        base_url = self.__base_api_url + f"/renders/body/{uuid}"
+        if scale != crafatar.parameters.scale(6):
+            base_url = f"{base_url}?&size={scale}"
+        if overlay != crafatar.parameters.Overlay.false:
+            base_url = f"{base_url}?&overlay={overlay}"
+        if default != crafatar.parameters.Default.default:
+            base_url = f"{base_url}?&default={default}"
+        return crafatar.objects.BodyRenderResponse(requests.get(base_url))
+
+    def getSkin(self,uuid: str, default=crafatar.parameters.Default.default):
+        base_url = self.__base_api_url + f"/skins/{uuid}"
+        if default != crafatar.parameters.Default.default:
+            base_url = f"{base_url}?&default={default}"
+        return crafatar.objects.SkinResponse(requests.get(base_url))
+
+    def getCape(self,uuid: str, default=crafatar.parameters.Default.default):
+        base_url = self.__base_api_url + f"/capes/{uuid}"
+        if default != crafatar.parameters.Default.default:
+            base_url = f"{base_url}?&default={default}"
+        return crafatar.objects.CapeResponse(requests.get(base_url))

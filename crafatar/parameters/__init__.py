@@ -63,7 +63,6 @@ class Overlay:
         return "true"
 
 
-@int
 def scale(scalenum: int):
     """
     Function used to define the scale factor for renders
@@ -74,7 +73,6 @@ def scale(scalenum: int):
     return scalenum
 
 
-@int
 def size(sizenum: int):
     """
     Function used to define the size for avatars in pixels
