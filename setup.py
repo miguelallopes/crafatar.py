@@ -9,7 +9,7 @@ def retrieve_required_dependencies():
 
 setup(
     name='crafatar',
-    version='1.0',
+    version="1.0.0-alpha",
 
     install_requires=retrieve_required_dependencies(),
     packages=find_packages(),
@@ -23,7 +23,7 @@ setup(
 
     project_urls={
         "Bug Tracker": "https://github.com/PWRScript/crafatar.py/issues",
-        #"Documentation": "https://docs.example.com/HelloWorld/", TODO, not created yet
+        #"Documentation": "https://docs.example.com/HelloWorld/", TODO Implement documentation
         "Source Code": "https://github.com/PWRScript/crafatar.py",
     },
     url='https://github.com/PWRScript/crafatar.py',

@@ -4,6 +4,9 @@ import crafatar.parameters
 
 import requests
 
+__author__ = "PWRScript"
+__version__ = "1.0.0-rc1"
+
 class CrafatarAPIWrapper(object):
     def __init__(self,base_api_url="https://crafatar.com"):
         self.__base_api_url = base_api_url

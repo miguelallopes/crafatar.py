@@ -1,17 +1,31 @@
 import requests, os, pathlib
-
-
-# TODO Better Error Handling
-
+import crafatar.error
 
 # Response Class
 class BaseResponse(object):
     def __init__(self, response: requests.Response):
-        self.response = response
+        print(response.content)
+        if response.status_code == 422:
+            raise crafatar.error.MalformedUUIDError("Probaly the UUID you specified does not exist")
+        elif response.status_code == 404:
+            raise crafatar.error.CapeNotFoundError("Probaly the UUID you specified does not have cape")
+        elif response.status_code == 500:
+            raise crafatar.error.ServerError("Probaly the UUID you specified does not exist or Mojang/Crafatar server has issues")
+        elif response.status_code == 200:
+            self.response = response
+
+
+    @property
+    def request_warning(self):
+        return self.response.headers["Warning"]
 
     @property
     def request_id(self):
         return self.response.headers["X-Request-ID"]
+
+    @property
+    def response_storage_type(self):
+        return self.response.headers["X-Storage-Type"]
 
     @property
     def response_time(self):
