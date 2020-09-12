@@ -1,18 +1,10 @@
 from setuptools import setup, find_packages
 
-
-def retrieve_required_dependencies():
-    dependency_list = []
-    for line in open("requirements.txt").read():
-        dependency_list.append(line.replace("\n", ""))
-    return dependency_list
-
-
 setup(
     name='crafatar',
     version="1.0.0",
 
-    install_requires=retrieve_required_dependencies(),
+    install_requires=["requests"],
     packages=find_packages(),
     package_data={"": ["requirements.txt", "LICENSE", "README.md"]},
 
