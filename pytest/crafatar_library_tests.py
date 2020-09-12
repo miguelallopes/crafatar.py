@@ -1,8 +1,9 @@
 import crafatar
+import pytest
 
 
 # First Test - Check if crafatar.CrafatarAPIWrapper() is instantiable
-def isCrafatarInstanced():
+def is_Crafatar_Instanced():
     '''
     Check if crafatar.CrafatarAPIWrapper() is instantiable
     '''
