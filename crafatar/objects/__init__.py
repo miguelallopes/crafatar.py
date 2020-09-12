@@ -1,5 +1,9 @@
-import requests, os, pathlib
 import crafatar.error
+
+import requests
+import os
+import pathlib
+
 
 # Response Class
 class BaseResponse(object):
@@ -10,10 +14,10 @@ class BaseResponse(object):
         elif response.status_code == 404:
             raise crafatar.error.CapeNotFoundError("Probaly the UUID you specified does not have cape")
         elif response.status_code == 500:
-            raise crafatar.error.ServerError("Probaly the UUID you specified does not exist or Mojang/Crafatar server has issues")
+            raise crafatar.error.ServerError(
+                "Probaly the UUID you specified does not exist or Mojang/Crafatar server has issues")
         elif response.status_code == 200:
             self.response = response
-
 
     @property
     def request_warning(self):
