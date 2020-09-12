@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 def retrieve_required_dependencies():
     dependency_list = []
     for line in open("requirements.txt").read():
-        dependency_list.append(line)
+        dependency_list.append(line[:-2])
     return dependency_list
 
 
